@@ -26,6 +26,7 @@ def follow_paths(section):
     sumA_in_loop = sumA
     sumB_in_loop = sumB
     a, b, c = section
+
     "to A"
     toA = sumA + a
     toAthroughC = sumB + b + c
@@ -38,18 +39,18 @@ def follow_paths(section):
         pathA_in_loop.append((A, a))
         sumA_in_loop = sumA + a
     else:
-        pat = pathB[:]
-        pat.extend([(B, b), (C, c)])
-        pathA_in_loop = pat
+        path = pathB[:]
+        path.extend([(B, b), (C, c)])
+        pathA_in_loop = path
         sumA_in_loop = sumB + b + c
 
     if toB < toBthroughC:
         pathB_in_loop.append((B, b))
         sumB_in_loop = sumB + b
     else:
-        pat = pathA[:]
-        pat.extend([(C, c), (A, a)])
-        pathB_in_loop = pat
+        path = pathA[:]
+        path.extend([(C, c), (A, a)])
+        pathB_in_loop = path
         sumB_in_loop = sumA + a + c
 
     pathA = pathA_in_loop
@@ -61,12 +62,12 @@ def follow_paths(section):
 def roads_to(sections):
     for section in sections:
         follow_paths(section)
-    print(pathA)
-    print(pathB)
+    print('Path A: {}'.format(pathA))
+    print('Path B: {}'.format(pathB))
     print('Shorter path is {} ->> {} km'.format('A'
                                                 if sumA < sumB else 'B', sumA
                                                 if sumA < sumB else sumB))
 
-
-sections = [(50, 10, 30), (5, 90, 20), (40, 2, 25), (10, 8, 0)]
-roads_to(sections)
+# Example data from 'Learn you Haskell for great good'
+# sections = [(50, 10, 30), (5, 90, 20), (40, 2, 25), (10, 8, 0)]
+# roads_to(sections)
